@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{this.evename}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content text-center>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title text-center>{{this.evename}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{this.desc}}</ion-card-content>
+  </ion-card>
+  <ion-button color="primary" (click)="onRegistration()">Register Here!</ion-button>
+</ion-content>

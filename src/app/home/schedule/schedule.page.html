@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Schedule</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <b>
+      <ion-row>
+        <ion-col>
+          EventName
+        </ion-col>
+        <ion-col>
+          Venue
+        </ion-col>
+        <ion-col>
+          Date
+        </ion-col>
+        <ion-col>
+          Timings
+        </ion-col>
+        <!-- <ion-col>
+          End Time
+        </ion-col> -->
+      </ion-row>
+    </b>
+    <ion-row *ngFor="let schd of scheduleList">
+      <ion-item-divider>
+
+        <ion-col>
+          {{schd.name}}
+        </ion-col>
+        <ion-col>
+          {{schd.venue}}
+        </ion-col>
+        <ion-col>
+          {{schd.date}}
+        </ion-col>
+        <ion-col>
+          {{schd.starttime}}-{{schd.endtime}}
+        </ion-col>
+        <!-- <ion-col>
+        {{schd.endtime}}
+      </ion-col> -->
+      </ion-item-divider>
+    </ion-row>
+
+
+  </ion-grid>
+</ion-content>

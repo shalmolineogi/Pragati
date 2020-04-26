@@ -1,0 +1,235 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register for {{ this.registeredEvent.evename }}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Enter Your Team Name :</ion-label>
+              <ion-input type="text" ngModel name="team" required></ion-input>
+            </ion-item>
+            <!-- <ion-card> -->
+            <form #addressForm="ngForm" (ngSubmit)="logValue()">
+              <!-- <ion-card-header> -->
+              <!-- <ion-card-title>Participants</ion-card-title> -->
+
+              <!-- <ion-list>
+                    <ion-item>
+                      <ion-button
+                        slot="end"
+                        type="button"
+                        (click)="onAddParticipant()"
+                        >Add Participants</ion-button
+                      >
+                    </ion-item>
+                  </ion-list> -->
+              <!-- </ion-card-header> -->
+              <!-- <ion-card-content> -->
+              <!-- <ion-button slot="end" type="submit">Add Participant</ion-button> -->
+              <!-- <div> -->
+              <ion-list>
+
+                <ion-item class="member_header">
+                  <ion-badge color="primary">Team Leader</ion-badge>
+                </ion-item>
+
+              </ion-list>
+              <ion-list>
+                <ion-item lines="none">
+                  <ion-label position="fixed">Name: </ion-label>
+                  <ion-label>{{ adminData.name }}</ion-label>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-label position="fixed">College: </ion-label>
+                  <ion-label>{{ adminData.clgname }}</ion-label>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-label position="fixed">Email: </ion-label>
+                  <ion-label>{{ adminData.email }}</ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="fixed">Contact: </ion-label>
+                  <ion-label>{{ adminData.contact }}</ion-label>
+                </ion-item>
+              </ion-list>
+              <!-- </div> -->
+              <div *ngIf="count > 1">
+                <div *ngFor="let participant of participants; let i = index">
+                  <!-- <ion-card> -->
+                  <!-- <ion-card-header> -->
+                  <!-- <ion-card-title> -->
+                  <!-- <ion-badge color="danger"> -->
+
+                  <!-- </ion-badge> -->
+
+
+                  <!-- </ion-card-title> -->
+                  <!-- </ion-card-header> -->
+                  <!-- <ion-card-content>
+                          
+                        </ion-card-content>
+                      </ion-card> -->
+                  <!-- <ion-list> -->
+
+                  <ion-item class="member_header">
+                    <ion-badge color="primary">
+                      Member {{i + 2}}</ion-badge>
+                    <ion-icon id="deleteIcon" slot="end" size="medium" (click)="removeParticipants(i)"
+                      name="close-circle">
+                    </ion-icon>
+                    <!-- <ion-button slot="end" (click)="removeParticipants(i)">Remove</ion-button> -->
+                  </ion-item>
+                  <!-- </ion-list> -->
+                  <ion-list>
+                    <!-- <div class="form-group"> -->
+                    <ion-item lines="none">
+                      <ion-label position="fixed">Name: </ion-label>
+                      <ion-input type="text" class="form-control" [(ngModel)]="participant.name"
+                        name="name_{{ participant.id }}">
+                      </ion-input>
+                    </ion-item>
+                    <!-- </div> -->
+                    <!-- <div class="form-group"> -->
+                    <ion-item lines="none">
+                      <ion-label position="fixed">College:
+                      </ion-label>
+                      <ion-input type="text" class="form-control" [(ngModel)]="participant.clgname"
+                        name="clgname_{{ participant.id }}">
+                      </ion-input>
+                    </ion-item>
+                    <!-- </div> -->
+                    <!-- <div class="form-group"> -->
+                    <ion-item lines="none">
+                      <ion-label position="fixed">Email: </ion-label>
+                      <ion-input type="text" class="form-control" [(ngModel)]="participant.email"
+                        name="email_{{ participant.id }}">
+                      </ion-input>
+                    </ion-item>
+                    <!-- </div> -->
+                    <!-- <div class="form-group"> -->
+                    <ion-item>
+                      <ion-label position="fixed">Contact:
+                      </ion-label>
+                      <ion-input type="text" class="form-control" [(ngModel)]="participant.contact"
+                        name="contact_{{ participant.id }}">
+                      </ion-input>
+                    </ion-item>
+                    <!-- </div> -->
+                  </ion-list>
+                </div>
+                <div>
+                  <!-- <ion-list> -->
+                  <ion-item>
+                    <!-- <ion-badge slot="end">
+                          <ion-icon name="checkmark" type="submit"></ion-icon> -->
+                    <ion-button slot="end" type="submit">Submit</ion-button>
+                    <!-- </ion-badge> -->
+
+                  </ion-item>
+                  <!-- </ion-list> -->
+                </div>
+              </div>
+              <!-- <ion-row class="cardfooter">
+                    <ion-col> -->
+              <ion-button horizontal="start" type="button" (click)="onAddParticipant()" fill="clear" expand="full">
+                Add Participants</ion-button>
+              <!-- </ion-col>
+                  </ion-row> -->
+              <!-- </ion-card-content> -->
+            </form>
+            <!-- </ion-card> -->
+          </ion-list>
+
+          <!-- trial -->
+          <!-- <ion-card>
+            <ion-card-header>
+              Participants
+            </ion-card-header>
+            <ion-card-content>
+              <form #addressForm="ngForm" (ngSubmit)="logValue()">
+                <div class="row justify-content-center">
+                  <div class="col-6">
+                    <ion-button type="button" (click)="addParticipants()">Add Participants</ion-button>
+                    <section *ngFor="let participant of participants; let i = index;">
+                      <div class="row">
+                        <div class="col-6">
+                          <h4>Participant {{i + 1}}</h4>
+                        </div>
+                        <div class="col-6 text-right">
+                          <ion-button type="button" (click)="removeParticipants(i)">Remove</ion-button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="form-group">
+                            <ion-label>Name</ion-label>
+                            <ion-input type="text" class="form-control" [(ngModel)]="participant.name"
+                              name="name_{{participant.id}}"></ion-input>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="form-group">
+                            <ion-label>College</ion-label>
+                            <ion-input type="text" class="form-control" [(ngModel)]="participant.college"
+                              name="college_{{participant.id}}"></ion-input>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="form-group">
+                            <ion-label>Email</ion-label>
+                            <ion-input type="text" class="form-control" [(ngModel)]="participant.email"
+                              name="email_{{participant.id}}"></ion-input>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="form-group">
+                            <ion-label>Contact</ion-label>
+                            <ion-input type="text" class="form-control" [(ngModel)]="participant.contact"
+                              name="contact_{{participant.id}}"></ion-input>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <div class="text-right">
+                      <ion-button slot="end">
+                        <ion-input type="submit" value="Submit"></ion-input>
+                      </ion-button>
+                    </div>
+
+                  </div>
+                </div>
+
+              </form>
+            </ion-card-content>
+          </ion-card> -->
+        </ion-col>
+      </ion-row>
+      <ion-row text-center>
+        <ion-col size-md="6" offset-md="3">
+          <ion-label>Amount Payable: {{ payAmt }}</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row text-center>
+        <ion-col size-md="6" offset-md="3">
+          <ion-button type="submit">Register</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<!-- <ion-label>{{ adminData.name }}</ion-label> -->

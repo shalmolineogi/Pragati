@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <!-- <ion-back-button defaultHref="/home"></ion-back-button> -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Events</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item position="floating" *ngFor="let eve of eventlist" [routerLink]="['/home/events/', eve._id]"
+      (click)="onAdd(eve._id,eve.evetype)" detail>
+      {{ eve.evetype }}
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<!-- /events:129172479   ->> event_details
+
+/events/quiz:1info
+/events/robotics
+/events/technical
+
+/events:quiz  ->> eD -->

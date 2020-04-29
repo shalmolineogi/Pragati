@@ -68,7 +68,7 @@
 <!-- ////////////////////////// -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>Register for {{ this.registeredEvent.evename }}</ion-title>
+    <ion-title>{{ registrationDetails.evename }}</ion-title>
     <ion-buttons slot="primary">
       <ion-button (click)="onCancel()">
         <ion-icon name="close"></ion-icon>
@@ -78,82 +78,105 @@
 </ion-header>
 <ion-content padding>
   <div id="register_body container">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-      <div class="row">
-        <div class="form-group col-10 offset-1">
-          <label for="teamName">Enter your team name: </label>
-          <input type="email" class="form-control" id="teamName" [(ngModel)]="teamname"
-            [ngModelOptions]="{standalone: true}" aria-describedby=" emailHelp" />
-        </div>
+    <!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)"> -->
+    <div class="row">
+      <div class="form-group col-10 offset-1">
+        <label for="teamName">Team Name </label>
+        <!-- <input type="email" class="form-control" id="teamName" [(ngModel)]="teamname"
+            [ngModelOptions]="{standalone: true}" aria-describedby=" emailHelp" /> -->
+        <label class="form-control col-8">{{ registrationDetails.teamname }}</label>
       </div>
-      <div class="row">
-        <div class="col-10 offset-1">
-          <label for="">Participant List:</label>
-        </div>
+    </div>
+    <div class="row">
+      <div class="col-10 offset-1">
+        <label for="">Participant List:</label>
       </div>
+    </div>
 
-      <div class="row mb-2" id="part_0">
+    <!-- <div class="row mb-2" id="part_0">
         <div class="col-10 offset-1">
           <div class="card text-white bg-dark">
             <div class="card-header" onClick="hide_and_see(this)">
               <label class="card-title">Team Leader</label>
-              <!-- <button class="btn btn-sm"><img src="https://img.icons8.com/ultraviolet/40/000000/cancel.png" /></button> -->
+              
             </div>
             <div class="card-body">
               <div class="row mb-2">
-                <label for="name" class="col-4 col-form-label">Name: </label>
-                <!-- <label class="form-control col-8">{{ adminData.name }}</label> -->
-                <ion-input class="form-control col-8" value="{{ adminData.name }}" readonly></ion-input>
-                <!-- <input type="text" name="name" class="form-control col-6" /> -->
+                <label for="name" class="col-4 col-form-label">Name: </label> -->
+    <!-- <label class="form-control col-8">{{ adminData.name }}</label> -->
+    <!-- <ion-input class="form-control col-8" value="{{ adminData.name }}" readonly></ion-input> -->
+    <!-- <input type="text" name="name" class="form-control col-6" /> -->
+    <!-- </div>
+              <div class="row mb-2">
+                <label for="name" class="col-4 col-form-label">College: </label> -->
+    <!-- <input type="text" name="name" class="form-control col-6" /> -->
+    <!-- <ion-input class="form-control col-8" value="{{ adminData.clgname }}" readonly></ion-input>
               </div>
               <div class="row mb-2">
-                <label for="name" class="col-4 col-form-label">College: </label>
-                <!-- <input type="text" name="name" class="form-control col-6" /> -->
-                <ion-input class="form-control col-8" value="{{ adminData.clgname }}" readonly></ion-input>
+                <label for="name" class="col-4 col-form-label">Email: </label> -->
+    <!-- <input type="text" name="name" class="form-control col-6" /> -->
+    <!-- <ion-input class="form-control col-8" value="{{ adminData.email }}" readonly></ion-input>
               </div>
               <div class="row mb-2">
-                <label for="name" class="col-4 col-form-label">Email: </label>
-                <!-- <input type="text" name="name" class="form-control col-6" /> -->
-                <ion-input class="form-control col-8" value="{{ adminData.email }}" readonly></ion-input>
+                <label for="name" class="col-4 col-form-label">Contact: -->
+    <!-- </label> -->
+    <!-- <input type="text" name="name" class="form-control col-6" /> -->
+    <!-- <label class="form-control col-8">{{ adminData.contact }}</label> -->
+    <!-- <ion-input class="form-control col-8" value="{{ adminData.contact }}" readonly></ion-input>
+              </div> -->
+    <!-- <div class="row mb-2">
+					  		<a href="#" class="card-link ">Card link</a>
+					    	<a href="#" class="card-link ">Another link</a>
+					  	</div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- <form #addressForm="ngForm"> -->
+    <!-- <div *ngIf=" count> 1"> -->
+    <div *ngFor="let participant of registrationDetails.participants.reverse(); let i = index">
+      <div class="row mb-2" id="part_{{ i + 1 }}">
+        <div class="col-10 offset-1">
+          <div class="card text-white bg-dark">
+            <div class="card-header" onclick="hide_and_see(this)">
+              <label class="card-title">Member{{ i + 1 }}</label>
+              <!-- <button class="btn btn-sm" (click)="removeParticipants(i)"> -->
+              <!-- <img src="https://img.icons8.com/ultraviolet/40/000000/cancel.png" /> -->
+              <!-- <img src="https://img.icons8.com/ios/50/000000/delete-trash.png" /> -->
+              <!-- <ion-icon name="trash-outline" (click)="removeParticipants(i)"></ion-icon> -->
+              <!-- </button> -->
+
+            </div>
+            <div class="card-body">
+              <div class="row mb-2">
+                <label for="name" class="col-4 col-form-label">Name:
+                </label>
+                <!-- <ion-input type="text" name="name" class="form-control col-8" [(ngModel)]="participant.name"
+                    name="name_{{ participant.id }}"></ion-input> -->
+                <label class="form-control col-8">{{ participant.name }}</label>
+              </div>
+              <div class="row mb-2">
+                <label for="name" class="col-4 col-form-label">College:
+                </label>
+                <!-- <ion-input type="text" name="name" class="form-control col-8" [(ngModel)]="participant.name"
+                    name="name_{{ participant.id }}"></ion-input> -->
+                <label class="form-control col-8">{{ participant.clgname }}</label>
+              </div>
+              <div class="row mb-2">
+                <label for="name" class="col-4 col-form-label">Email:
+                </label>
+                <!-- <ion-input type="text" name="name" class="form-control col-8" [(ngModel)]="participant.name"
+                    name="name_{{ participant.id }}"></ion-input> -->
+                <label class="form-control col-8">{{ participant.email }}</label>
               </div>
               <div class="row mb-2">
                 <label for="name" class="col-4 col-form-label">Contact:
                 </label>
-                <!-- <input type="text" name="name" class="form-control col-6" /> -->
-                <!-- <label class="form-control col-8">{{ adminData.contact }}</label> -->
-                <ion-input class="form-control col-8" value="{{ adminData.contact }}" readonly></ion-input>
+                <!-- <ion-input type="text" name="name" class="form-control col-8" [(ngModel)]="participant.name"
+                    name="name_{{ participant.id }}"></ion-input> -->
+                <label class="form-control col-8">{{ participant.contact }}</label>
               </div>
               <!-- <div class="row mb-2">
-					  		<a href="#" class="card-link ">Card link</a>
-					    	<a href="#" class="card-link ">Another link</a>
-					  	</div> -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- <form #addressForm="ngForm"> -->
-      <!-- <div *ngIf=" count> 1"> -->
-      <div *ngFor="let participant of participants; let i = index">
-        <div class="row mb-2" id="part_{{ i + 1 }}">
-          <div class="col-10 offset-1">
-            <div class="card text-white bg-dark">
-              <div class="card-header" onclick="hide_and_see(this)">
-                <label class="card-title">Member{{ i + 2 }}</label>
-                <button class="btn btn-sm" (click)="removeParticipants(i)">
-                  <img src="https://img.icons8.com/ultraviolet/40/000000/cancel.png" />
-                  <!-- <img src="https://img.icons8.com/ios/50/000000/delete-trash.png" /> -->
-                  <!-- <ion-icon name="trash-outline" (click)="removeParticipants(i)"></ion-icon> -->
-                </button>
-
-              </div>
-              <div class="card-body">
-                <div class="row mb-2">
-                  <label for="name" class="col-4 col-form-label">Name:
-                  </label>
-                  <ion-input type="text" name="name" class="form-control col-8" [(ngModel)]="participant.name"
-                    name="name_{{ participant.id }}"></ion-input>
-                </div>
-                <div class="row mb-2">
                   <label for="name" class="col-4 col-form-label">College:
                   </label>
                   <ion-input type="text" name="name" class="form-control col-8" [(ngModel)]="participant.clgname"
@@ -170,26 +193,26 @@
                   </label>
                   <ion-input type="text" name="name" class="form-control col-8" [(ngModel)]="participant.contact"
                     name="contact_{{ participant.id }}"></ion-input>
-                </div>
-                <!-- <div class="row mb-2">
+                </div> -->
+              <!-- <div class="row mb-2">
 					  		<a href="#" class="card-link ">Card link</a>
 					    	<a href="#" class="card-link ">Another link</a>
 					  	</div> -->
-              </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- </div> -->
-      <!-- <div class="row mb-2">
+    </div>
+    <!-- </div> -->
+    <!-- <div class="row mb-2">
           <div class="col-6 offset-3">
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </div> -->
-      <!-- </form> -->
-      <ion-button horizontal="start" type="button" (click)="onAddParticipant()" fill="clear" expand="full">
-        Add Participants</ion-button>
-      <ion-grid>
+    <!-- </form> -->
+    <!-- <ion-button horizontal="start" type="button" (click)="onAddParticipant()" fill="clear" expand="full"> -->
+    <!-- Add Participants</ion-button> -->
+    <!-- <ion-grid>
         <ion-row text-center>
           <ion-col size-md="6" offset-md="3">
             <ion-label>Amount Payable: {{ payAmt }}</ion-label>
@@ -200,7 +223,7 @@
             <ion-button type="submit">Register</ion-button>
           </ion-col>
         </ion-row>
-      </ion-grid>
-    </form>
+      </ion-grid> -->
+    <!-- </form> -->
   </div>
 </ion-content>

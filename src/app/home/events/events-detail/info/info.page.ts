@@ -75,22 +75,44 @@ export class InfoPage implements OnInit {
       .then((alertEl) => alertEl.present());
   }
   onRegistration() {
-    this.modalCtrl
-      .create({
-        component: EveRegComponent,
-        componentProps: {
-          registeredEvent: this.eveInfo,
-        },
-      })
-      .then((modalEl) => {
-        modalEl.present();
-        return modalEl.onDidDismiss();
-      })
-      .then((resData) => {
-        console.log(resData.data, resData.role);
-        if (resData.role == "success") {
-          this.showAlert(resData.data.messege);
-        }
-      });
+    console.log(localStorage.getItem("_cap_authData"));
+    const adminDetails = JSON.parse(localStorage.getItem("_cap_authData")) as {
+      userId: string;
+      name: string;
+      email: string;
+      clgname: string;
+      contact: string;
+      token: string;
+      expirationDate: string;
+      registeredEvents: [string];
+    };
+    let flag = true;
+    adminDetails.registeredEvents.forEach((el) => {
+      if (el == this.evename) {
+        flag = false;
+      }
+    });
+
+    if (flag) {
+      this.modalCtrl
+        .create({
+          component: EveRegComponent,
+          componentProps: {
+            registeredEvent: this.eveInfo,
+          },
+        })
+        .then((modalEl) => {
+          modalEl.present();
+          return modalEl.onDidDismiss();
+        })
+        .then((resData) => {
+          console.log(resData.data, resData.role);
+          if (resData.role == "success") {
+            this.showAlert(resData.data.messege);
+          }
+        });
+    } else {
+      this.showAlert("Already registered for this event");
+    }
   }
 }

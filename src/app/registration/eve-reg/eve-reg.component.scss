@@ -9,6 +9,10 @@
     font-size: 18px;
 }
 
+.card-body label {
+    padding-right: -10px;
+}
+
 .card-header img {
 
     width: 20px;
@@ -18,3 +22,7 @@
     position: relative;
     left: calc(100% - 90px);
 }
+
+// ion-content {
+//     overflow: scroll;
+// }

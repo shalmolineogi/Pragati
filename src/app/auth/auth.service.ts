@@ -13,7 +13,9 @@ export interface AuthResData {
   email: string;
   name: string;
   clgname: string;
-  contact:string;
+  contact: string;
+  registeredEvents: [string];
+  registrationIDs: [string];
 }
 
 @Injectable({
@@ -77,10 +79,12 @@ export class AuthService implements OnDestroy {
           userId: string;
           name: string;
           email: string;
-          clgname: string,
-          contact:string,
+          clgname: string;
+          contact: string;
           token: string;
           expirationDate: string;
+          registeredEvents: [string];
+          registrationIDs: [string];
         };
         const expirationTime = new Date(parsedData.expirationDate);
         if (expirationTime < new Date()) {
@@ -93,7 +97,9 @@ export class AuthService implements OnDestroy {
           parsedData.clgname,
           parsedData.contact,
           parsedData.token,
-          expirationTime
+          expirationTime,
+          parsedData.registeredEvents,
+          parsedData.registrationIDs
         );
         return user;
       }),
@@ -165,7 +171,9 @@ export class AuthService implements OnDestroy {
       userData.clgname,
       userData.contact,
       userData.token,
-      expirationDate
+      expirationDate,
+      userData.registeredEvents,
+      userData.registrationIDs
     );
     this._user.next(user);
     this.autoLogout(user.tokenDuration);
@@ -176,7 +184,9 @@ export class AuthService implements OnDestroy {
       userData.clgname,
       userData.contact,
       userData.token,
-      expirationDate.toISOString()
+      expirationDate.toISOString(),
+      userData.registeredEvents,
+      userData.registrationIDs
     );
   }
 
@@ -184,22 +194,27 @@ export class AuthService implements OnDestroy {
     userId: string,
     name: string,
     email: string,
-    clgname:string,
-    contact:string,
+    clgname: string,
+    contact: string,
     token: string,
-    expirationDate: string
+    expirationDate: string,
+    registeredEvents: [string],
+    registrationIDs: [string]
   ) {
     const data = JSON.stringify({
       userId: userId,
       name: name,
       email: email,
-      clgname:clgname,
-      contact:contact,
+      clgname: clgname,
+      contact: contact,
       token: token,
       expirationDate: expirationDate,
+      registeredEvents: registeredEvents,
+      registrationIDs: registrationIDs,
     });
 
     Plugins.Storage.set({ key: "authData", value: data });
+    // Plugins.Storage.set({ key: "RegisteredEvents", value: regEve });
   }
 
   ngOnDestroy() {

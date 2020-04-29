@@ -6,7 +6,9 @@ export class User {
     public clgname: string,
     public contact: string,
     private _token: string,
-    private _tokenExpiration: Date
+    private _tokenExpiration: Date,
+    public registeredEvents: [string],
+    public registrationIDs: [string]
   ) {}
   get token() {
     if (!this._tokenExpiration || this._tokenExpiration <= new Date()) {

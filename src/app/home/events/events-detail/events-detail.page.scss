@@ -1,0 +1,27 @@
+#Content {
+    --background: url(../../../../assets/images/hero-bg.jpg) -40px 40%/120% 50% no-repeat;
+    --background-size: cover;
+}
+
+ion-item {
+    margin: 10px auto;
+    // padding-top: 50px;
+    border-bottom: 1px solid whitesmoke;
+
+
+}
+
+ion-list {
+    position: relative;
+    // top: 80px;
+    // color: white
+}
+
+ion-list ion-item {
+    --background-size: cover;
+}
+
+ion-list ion-item ion-card ion-card-content {
+    color: white;
+    // --background-size: cover;
+}

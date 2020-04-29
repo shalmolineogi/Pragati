@@ -23,6 +23,7 @@ import { AdminDetails } from "./Admin.model";
 export class EveRegComponent implements OnInit {
   @Input() registeredEvent: Info;
   private count: number = 0;
+  teamname: String;
   maxcount: number = 4;
   adminData: AdminDetails;
   participantsDet = [];
@@ -37,6 +38,7 @@ export class EveRegComponent implements OnInit {
   contact: string;
   token: string;
   expirationDate: string;
+  c: boolean = true;
   constructor(
     private modalCtrl: ModalController,
     private authSrvc: AuthService,
@@ -60,6 +62,8 @@ export class EveRegComponent implements OnInit {
       contact: string;
       token: string;
       expirationDate: string;
+      registeredEvents: [string];
+      registrationIDs: [string];
     };
     console.log(adminDetails.name);
     this.adminData = adminDetails;
@@ -103,6 +107,17 @@ export class EveRegComponent implements OnInit {
       .then((alertEl) => alertEl.present());
   }
   onSubmit(form: NgForm) {
+    // const adminDetails = JSON.parse(localStorage.getItem("_cap_authData")) as {
+    //   userId: string;
+    //   name: string;
+    //   email: string;
+    //   clgname: string;
+    //   contact: string;
+    //   token: string;
+    //   expirationDate: string;
+    //   registeredEvents: [string];
+    //   registrationIDs: [string];
+    // };
     this.participants.forEach((el) => {
       this.participantsDet.push({
         participantNo: el.id,
@@ -115,7 +130,7 @@ export class EveRegComponent implements OnInit {
     console.log(this.participantsDet);
     this.eveRegSrvc
       .register(
-        form.value.team,
+        this.teamname,
         // this.adminData,
         this.adminData.token,
         this.registeredEvent.evename,
@@ -125,8 +140,27 @@ export class EveRegComponent implements OnInit {
       )
       .subscribe(
         (resData: any) => {
-          console.log("Rsponse: ", resData.messege);
+          console.log("Response: ", resData.messege);
           if (resData) {
+            console.log(resData);
+            let id = resData.regId;
+            console.log(id);
+            const adminDetails = JSON.parse(
+              localStorage.getItem("_cap_authData")
+            ) as {
+              userId: string;
+              name: string;
+              email: string;
+              clgname: string;
+              contact: string;
+              token: string;
+              expirationDate: string;
+              registeredEvents: [String];
+              registrationIDs: [string];
+            };
+            adminDetails.registrationIDs.push(id);
+            adminDetails.registeredEvents.push(this.registeredEvent.evename);
+            localStorage.setItem("_cap_authData", JSON.stringify(adminDetails));
             this.modalCtrl.dismiss(resData, "success");
           }
         },
@@ -158,23 +192,15 @@ export class EveRegComponent implements OnInit {
     this.count = this.count - 1;
   }
   onClgChange($event) {
-    // console.log($event.target.value);
-    if ($event.target.value === "MCKVIE") {
+    console.log($event.target.value);
+    if (
+      $event.target.value === "MCKVIE" ||
+      $event.target.value === "mckvie" ||
+      $event.target.value === "MCKV Institute of Engineering"
+    ) {
       this.payAmt = this.mckvAmt;
     } else {
       this.payAmt = this.nonmckvAmt;
     }
-  }
-
-  hide_and_see(item) {
-    console.log(item);
-
-    let item_body = document
-      .getElementById(`part_${item}`)
-      .querySelector(".card-body");
-    console.log(item_body);
-    // item_body.style.display =
-    //   item_body.style.display == "none" ? "block" : "none";
-    styles: ["item-body{display==none?block:none}"];
   }
 }

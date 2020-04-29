@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/events"></ion-back-button>
     </ion-buttons>
@@ -7,10 +7,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
+<ion-content id="Content">
+  <ion-list padding>
+
     <ion-item position="floating" *ngFor="let eve of Eventlist" [routerLink]="['/home/events',this.ref, eve._id]"
       detail>
-      {{ eve.evename }}</ion-item>
+      <!-- <ion-card>
+        <ion-card-content> -->
+      {{ eve.evename }}
+      <!-- </ion-card-content>
+      </ion-card> -->
+    </ion-item>
+
   </ion-list>
 </ion-content>

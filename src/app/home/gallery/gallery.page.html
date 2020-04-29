@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -7,4 +7,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content id="Content">
+  <ion-list>
+    <ion-item *ngFor="let item of picList">
+      <!-- <ion-thumbnail slot="start"> -->
+      <ion-img [src]="item.picurl"></ion-img>
+      <!-- <img src="item.picurl" /> -->
+      <!-- </ion-thumbnail> -->
+      <!-- <ion-label>{{item.text}}</ion-label> -->
+    </ion-item>
+  </ion-list>
+</ion-content>
